@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morro do Campestre Resort Park - Urubici/SC</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: 'rgb(251, 199, 7)', // #FBC707 Primary Accent Color
+                            yellowDark: '#dcae02',
+                            yellowLight: '#fef3c7',
+                            dark: '#1E293B',
+                            slate: '#64748B',
+                            bgLight: '#F8FAFC',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #E2E8F0;
+            color: #0F172A;
+        }
+        /* Viewport simulator wrapper */
+        .frame-wrapper {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0 auto;
+        }
+        .desktop-view {
+            width: 100%;
+            max-width: 1280px;
+            border-radius: 16px;
+        }
+        .mobile-view {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            border: 12px solid #0F172A;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+            overflow-y: auto;
+        }
+        /* Clean smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+        /* Color Utility for exact RGB requirement */
+        .bg-brand-yellow {
+            background-color: rgb(251, 199, 7);
+        }
+        .text-brand-yellow {
+            color: rgb(251, 199, 7);
+        }
+        .border-brand-yellow {
+            border-color: rgb(251, 199, 7);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-200 text-slate-800 antialiased selection:bg-amber-100 selection:text-amber-900">
+
+    <!-- MAIN VIEWPORT CONTAINER -->
+    <main class="flex-1  items-center justify-center">
+        <div id="viewport-frame" >
+
+            <!-- NAVBAR: Bright Yellow rgb(251, 199, 7) Header -->
+            <nav class="bg-brand-yellow text-slate-950 sticky top-0 z-40 border-b border-yellow-400 shadow-md">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+                    <!-- Brand Logo -->
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl  text-brand-yellow flex items-center justify-center font-black text-xl shadow-md">
+                            <img src="./logo1.png" alt="" srcset="">
+                        </div>
+                        
+                    </div>
+
+                    <!-- Desktop Nav Links -->
+                    <div class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-950">
+                        <a href="#sobre" class="hover:text-slate-800 transition-colors py-1">O Parque</a>
+                        <a href="#atracoes" class="hover:text-slate-800 transition-colors py-1">Atrações</a>
+                        <a href="#restaurante" class="hover:text-slate-800 transition-colors py-1">Gastronomia</a>
+                        <a href="#localizacao" class="hover:text-slate-800 transition-colors py-1">Como Chegar</a>
+                        <a href="#faq" class="hover:text-slate-800 transition-colors py-1">Dúvidas</a>
+                    </div>
+
+                    <!-- Action Buttons (No Cart Icon, direct Ticket Button) -->
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <a href="https://ingressos.parquemorrodocampestre.com.br/" target="_blank" rel="noopener noreferrer" class="bg-slate-950 hover:bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg hover:shadow-xl transition-all border border-slate-800">
+                            <i class="fa-solid fa-ticket text-brand-yellow"></i>
+                            <span>Comprar Ingressos</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-80"></i>
+                        </a>
+
+                        <button class="md:hidden text-slate-950 p-2 text-xl" onclick="toggleMobileMenu()" aria-label="Abrir Menu">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Drawer Menu -->
+                <div id="mobile-nav-drawer" class="hidden bg-yellow-400 border-t border-yellow-500 px-5 py-4 flex-col gap-3 text-sm font-bold shadow-lg">
+                    <a href="#sobre" onclick="toggleMobileMenu()" class="py-2 border-b border-yellow-500/50 text-slate-950">O Parque</a>
+                    <a href="#atracoes" onclick="toggleMobileMenu()" class="py-2 border-b border-yellow-500/50 text-slate-950">Atrações & Mirantes</a>
+                    <a href="#restaurante" onclick="toggleMobileMenu()" class="py-2 border-b border-yellow-500/50 text-slate-950">Restaurante Paradouro</a>
+                    <a href="#localizacao" onclick="toggleMobileMenu()" class="py-2 border-b border-yellow-500/50 text-slate-950">Como Chegar</a>
+                    <a href="#faq" onclick="toggleMobileMenu()" class="py-2 border-b border-yellow-500/50 text-slate-950">Dúvidas Frequentes</a>
+                    <a href="https://ingressos.morrodocampestre.com.br" target="_blank" rel="noopener noreferrer" class="mt-2 w-full bg-slate-950 text-white font-extrabold py-3 rounded-xl text-center flex items-center justify-center gap-2 shadow-md">
+                        <i class="fa-solid fa-ticket text-brand-yellow"></i> Comprar Ingressos Online
+                    </a>
+                </div>
+            </nav>
+
+            <!-- HERO BANNER SECTION -->
+            <section class="relative bg-slate-950 text-white overflow-hidden min-h-[420px] sm:min-h-[520px] flex items-center">
+                <!-- High quality mountain background with warm overlay -->
+                <div class="absolute inset-0 z-0 opacity-60 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-10"></div>
+
+                <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+                    <div class="max-w-2xl space-y-5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-yellow text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md">
+                            <i class="fa-solid fa-location-dot"></i> Urubici • Serra Catarinense
+                        </div>
+                        
+                        <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-white">
+                            Colecione <span class="text-brand-yellow">momentos inesquecíveis</span> na natureza.
+                        </h2>
+                        
+                        <p class="text-slate-200 text-sm sm:text-lg font-normal leading-relaxed">
+                            Visite o nosso parque e viva uma experiência única de tranquilidade, ar puro e contemple a famosa janela natural na pedra de arenito com vista para o Vale do Rio Canoas.
+                        </p>
+
+                        <div class="pt-2 flex flex-wrap items-center gap-4">
+                            <a href="https://ingressos.parquemorrodocampestre.com.br/" target="_blank" rel="noopener noreferrer" class="bg-brand-yellow hover:bg-yellow-400 text-slate-950 font-black px-7 py-4 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-2.5 text-sm sm:text-base">
+                                <i class="fa-solid fa-ticket text-slate-950"></i>
+                                <span>Garantir Ingressos Online</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </a>
+                            <a href="#sobre" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md font-bold px-6 py-4 rounded-2xl transition-all text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-circle-info"></i> Conhecer o Parque
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXTERNAL SALES REDIRECT CALLOUT BANNER -->
+            <section id="ingressos" class="py-12 px-4 sm:px-6 bg-slate-100">
+                <div class="max-w-7xl mx-auto">
+                    <div class="bg-gradient-to-br from-brand-yellow via-amber-400 to-amber-500 rounded-3xl p-6 sm:p-10 text-slate-950 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-yellow-400">
+                        <!-- Decorative blur elements -->
+                        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/20 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="absolute -left-10 -top-10 w-48 h-48 bg-black/10 rounded-full blur-xl pointer-events-none"></div>
+
+                        <div class="space-y-3 relative z-10 text-center md:text-left max-w-2xl">
+                            <span class="bg-slate-950 text-brand-yellow text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full inline-block">
+                                Bilheteria Digital Externa
+                            </span>
+                            <h3 class="text-2xl sm:text-4xl font-black leading-tight text-slate-950">
+                                Compre seus Ingressos Sem Filas! 🎟️
+                            </h3>
+                            <p class="text-slate-900 text-sm sm:text-base font-medium leading-relaxed">
+                                Agilize sua entrada garantindo antecipadamente seu ingresso individual por apenas <strong>R$ 50,00</strong> diretamente na nossa plataforma oficial de vendas.
+                            </p>
+                            <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-1 text-xs text-slate-950 font-bold">
+                                <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-slate-950"></i> Confirmação instantânea</span>
+                                <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-slate-950"></i> Escolha a data da visita</span>
+                                <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-slate-950"></i> Crianças de 0 a 5 anos isentas</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA External Button -->
+                        <div class="relative z-10 w-full md:w-auto flex-shrink-0 text-center">
+                            <a href="https://ingressos.parquemorrodocampestre.com.br/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-slate-950 hover:bg-slate-800 text-white font-black px-8 py-4 rounded-2xl shadow-2xl hover:scale-105 transition-all text-base border border-slate-800">
+                                <span>Acessar Site de Ingressos</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-brand-yellow"></i>
+                            </a>
+                            <span class="block text-[11px] text-slate-900 mt-2 font-bold">Redirecionamento seguro para canal oficial</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT THE PARK SECTION -->
+            <section id="sobre" class="py-14 px-4 sm:px-6 bg-white border-t border-slate-200">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    
+                    <!-- Left: Text content -->
+                    <div class="space-y-4">
+                        <span class="text-slate-950 text-xs font-black uppercase tracking-wider bg-brand-yellow px-3 py-1 rounded-full">
+                            Sobre o Parque
+                        </span>
+                        <h3 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                            Descubra o Parque Morro do Campestre em Urubici
+                        </h3>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            Visite o Parque Morro do Campestre e mergulhe nas belezas da Serra Catarinense. Aqui, você encontrará natureza preservada, ar puro e vistas de tirar o fôlego.
+                        </p>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            O grande destaque do parque é a majestosa <strong>pedra de arenito</strong>, esculpida ao longo do tempo, formando uma janela natural para o Vale do Rio Canoas e as montanhas. O pôr do sol é um espetáculo à parte, transformando o céu em um show de cores durante todo o ano.
+                        </p>
+
+                        <div class="pt-3 grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-amber-50/60 border border-amber-200 rounded-2xl">
+                                <div class="text-slate-950 font-extrabold text-base mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-mountain text-brand-yellow text-lg bg-slate-950 p-1.5 rounded-lg"></i> Mirantes
+                                </div>
+                                <p class="text-xs text-slate-600">Panorama deslumbrante para o Vale do Rio Canoas.</p>
+                            </div>
+                            <div class="p-4 bg-amber-50/60 border border-amber-200 rounded-2xl">
+                                <div class="text-slate-950 font-extrabold text-base mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-utensils text-brand-yellow text-lg bg-slate-950 p-1.5 rounded-lg"></i> Paradouro
+                                </div>
+                                <p class="text-xs text-slate-600">Gastronomia regional em ambiente acolhedor.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Photo Showcase -->
+                    <div class="relative">
+                        <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80" alt="Vista do Morro do Campestre" class="w-full h-80 sm:h-96 object-cover">
+                        </div>
+                        <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-xl border border-slate-200 max-w-xs hidden sm:block">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-brand-yellow text-slate-950 flex items-center justify-center font-bold text-lg">
+                                    <i class="fa-solid fa-sun"></i>
+                                </div>
+                                <div>
+                                    <span class="font-black text-xs text-slate-900 block">Pôr do Sol Mágico</span>
+                                    <span class="text-[11px] text-slate-500 font-medium">Melhor ponto de contemplação da serra</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ATTRACTIONS & INFRASTRUCTURE -->
+            <section id="atracoes" class="py-14 px-4 sm:px-6 bg-slate-100 border-t border-slate-200">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center max-w-2xl mx-auto mb-10">
+                        <span class="text-slate-950 text-xs font-black uppercase tracking-wider bg-brand-yellow px-3 py-1 rounded-full">Estrutura Completa</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3">Tudo pronto para a sua visita</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-1">Infraestrutura planejada para o seu conforto e segurança.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all group">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-yellow text-slate-950 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-stairs"></i>
+                            </div>
+                            <h4 class="font-extrabold text-slate-900 text-lg mb-2">Escadarias Acessíveis</h4>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                Subida equipada com degraus e corrimão seguro para permitir o acesso tranquilo à Janela da Pedra de Arenito.
+                            </p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div id="restaurante" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all group">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-yellow text-slate-950 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-mug-hot"></i>
+                            </div>
+                            <h4 class="font-extrabold text-slate-900 text-lg mb-2">Restaurante Paradouro</h4>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                Saboreie deliciosos pratos regionais, cafés especiais e opções gastronômicas em um ambiente rústico e aquecido.
+                            </p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all group">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-yellow text-slate-950 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-gift"></i>
+                            </div>
+                            <h4 class="font-extrabold text-slate-900 text-lg mb-2">Lojinha de Artesanato</h4>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                Leve para casa uma lembrança da Serra Catarinense com produtos locais, chocolates, vinhos e lembranças artesanais.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ SECTION -->
+            <section id="faq" class="py-14 px-4 sm:px-6 bg-white border-t border-slate-200">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-10">
+                        <span class="text-slate-950 text-xs font-black uppercase tracking-wider bg-brand-yellow px-3 py-1 rounded-full">Dúvidas Frequentes</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3">Perguntas Mais Comuns</h3>
+                    </div>
+
+                    <div class="space-y-4 text-xs sm:text-sm">
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <h5 class="font-extrabold text-slate-900 flex items-center justify-between">
+                                Como funciona a venda de ingressos online?
+                                <i class="fa-solid fa-chevron-down text-slate-400"></i>
+                            </h5>
+                            <p class="text-slate-600 mt-2 leading-relaxed">
+                                Ao clicar em "Comprar Ingressos", você é direcionado à nossa bilheteria digital parceira, onde seleciona o dia da sua visita e efetua o pagamento com cartão ou PIX.
+                            </p>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <h5 class="font-extrabold text-slate-900 flex items-center justify-between">
+                                Qual o valor do ingresso e meia-entrada?
+                                <i class="fa-solid fa-chevron-down text-slate-400"></i>
+                            </h5>
+                            <p class="text-slate-600 mt-2 leading-relaxed">
+                                O valor inteiro é R$ 50,00 por pessoa. Crianças de até 5 anos não pagam. Estudantes e idosos possuem direito a benefício legal conforme regulamento oficial na bilheteria.
+                            </p>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <h5 class="font-extrabold text-slate-900 flex items-center justify-between">
+                                O parque funciona todos os dias?
+                                <i class="fa-solid fa-chevron-down text-slate-400"></i>
+                            </h5>
+                            <p class="text-slate-600 mt-2 leading-relaxed">
+                                Sim! O parque está aberto diariamente das 08h às 18h, inclusive aos sábados, domingos e feriados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LOCATION SECTION -->
+            <section id="localizacao" class="py-12 px-4 sm:px-6 bg-slate-100 border-t border-slate-200">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <span class="text-slate-950 text-xs font-black uppercase tracking-wider bg-brand-yellow px-3 py-1 rounded-full">Localização</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Como Chegar ao Parque</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            O Morro do Campestre está localizado a apenas <strong>8 km do centro de Urubici/SC</strong> com estrada de fácil acesso.
+                        </p>
+
+                        <div class="space-y-3 text-xs sm:text-sm text-slate-700 pt-2">
+                            <div class="flex items-center gap-3 p-3.5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                                <i class="fa-solid fa-map-location-dot text-slate-950 bg-brand-yellow p-2 rounded-xl text-base"></i>
+                                <span>Estrada Geral do Morro do Campestre, Urubici - SC</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3.5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                                <i class="fa-solid fa-clock text-slate-950 bg-brand-yellow p-2 rounded-xl text-base"></i>
+                                <span>Aberto todos os dias das 08h00 às 18h00</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <a href="https://ingressos.parquemorrodocampestre.com.br/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-brand-yellow hover:bg-yellow-400 text-slate-950 font-black px-6 py-3.5 rounded-2xl shadow-md transition-all text-xs sm:text-sm">
+                                <i class="fa-solid fa-ticket text-slate-950"></i> Comprar Ingressos para o Passeio <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-80"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Map graphic card -->
+                    <div class="bg-gradient-to-br from-slate-200 to-slate-300 rounded-3xl p-6 border border-slate-300 h-64 flex flex-col justify-center items-center text-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-25 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="relative z-10 space-y-2">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-yellow text-slate-950 flex items-center justify-center text-xl mx-auto shadow-md font-bold">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <h5 class="font-extrabold text-slate-900 text-base">Morro do Campestre - Urubici</h5>
+                            <p class="text-xs text-slate-700 font-medium">8 km do centro urbano de Urubici/SC</p>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Morro+do+Campestre+Estr.+Geral+Campestre+Urubici+SC+88650-000" target="_blank" class="inline-flex items-center gap-2 bg-slate-950 hover:bg-slate-800 text-white font-bold px-4 py-2 rounded-xl text-xs transition-all mt-2 shadow-sm">
+                                Abrir no GPS <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-brand-yellow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER: Yellow Header Matching Footer -->
+            <footer class="bg-brand-yellow text-slate-950 py-8 px-4 sm:px-6 border-t border-yellow-400">
+                <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl  text-brand-yellow flex items-center justify-center font-black text-xl shadow-sm">
+                            <img src="./logo1.png" alt="">
+                        </div>
+                        <div>
+                            <span class="font-black text-sm uppercase block leading-none text-slate-950">Morro do Campestre</span>
+                            <span class="text-xs text-slate-900 font-bold">Urubici • Santa Catarina</span>
+                        </div>
+                    </div>
+
+                    <div class="text-xs font-bold text-slate-900">
+                        © 2026 Morro do Campestre Resort Park. Todos os direitos reservados.
+                    </div>
+
+                    <div class="flex items-center gap-4 text-slate-950 text-lg font-bold">
+                        <a href="#" class="hover:text-slate-800 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-slate-800 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        function setDeviceView(type) {
+            const frame = document.getElementById('viewport-frame');
+            const btnDesktop = document.getElementById('btn-desktop');
+            const btnMobile = document.getElementById('btn-mobile');
+
+            if (type === 'mobile') {
+                frame.classList.remove('desktop-view');
+                frame.classList.add('mobile-view');
+
+                btnMobile.className = "px-4 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all bg-white text-slate-900 shadow-sm border border-slate-200";
+                btnDesktop.className = "px-4 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-all";
+            } else {
+                frame.classList.remove('mobile-view');
+                frame.classList.add('desktop-view');
+
+                btnDesktop.className = "px-4 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all bg-white text-slate-900 shadow-sm border border-slate-200";
+                btnMobile.className = "px-4 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-all";
+            }
+        }
+
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-nav-drawer');
+            drawer.classList.toggle('hidden');
+            drawer.classList.toggle('flex');
+        }
+    </script>
+</body>
+</html>
